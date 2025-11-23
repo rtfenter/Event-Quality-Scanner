@@ -122,7 +122,7 @@ https://github.com/rtfenter/Systems-of-Trust-Series
 
 ## Status
 
-MVP planned.  
+MVP implemented and active.  
 This scanner will focus on core mechanics required to demonstrate event quality checks, not full production validation.
 
 ---
