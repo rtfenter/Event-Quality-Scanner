@@ -21,7 +21,8 @@
       <div class="panel-header">
         <h2>Input Event</h2>
         <div class="panel-actions">
-          <button id="load-example" class="btn btn-secondary">Load Example Event</button>
+          <button id="load-valid" class="btn btn-secondary">Load Valid Example</button>
+          <button id="load-broken" class="btn btn-secondary">Load Broken Example</button>
         </div>
       </div>
 
@@ -29,12 +30,13 @@
         Paste a single JSON object below and click <strong>Scan Event</strong>.
       </p>
 
-      <textarea id="event-input" class="event-input" spellcheck="false" rows="16" placeholder='{
-  "event_name": "user.login",
-  "user_id": 123,
-  "timestamp": "2025-11-22T15:00:00Z",
-  "environment": "prod"
-}'></textarea>
+      <textarea
+        id="event-input"
+        class="event-input"
+        spellcheck="false"
+        rows="16"
+        placeholder=""
+      ></textarea>
 
       <div class="panel-footer">
         <button id="scan-button" class="btn btn-primary">Scan Event</button>
@@ -56,36 +58,38 @@
       <div class="checks-grid">
         <div class="check-group">
           <h3>Required Fields</h3>
-          <ul id="required-issues" class="issues-list"></ul>
+          <ul id="required-issues" class="issues-list empty"></ul>
         </div>
 
         <div class="check-group">
           <h3>Types &amp; Formats</h3>
-          <ul id="type-issues" class="issues-list"></ul>
+          <ul id="type-issues" class="issues-list empty"></ul>
         </div>
 
         <div class="check-group">
           <h3>Naming Conventions</h3>
-          <ul id="naming-issues" class="issues-list"></ul>
+          <ul id="naming-issues" class="issues-list empty"></ul>
         </div>
 
         <div class="check-group">
           <h3>Domain Rules</h3>
-          <ul id="domain-issues" class="issues-list"></ul>
+          <ul id="domain-issues" class="issues-list empty"></ul>
         </div>
       </div>
 
       <div class="raw-output">
         <h3>Raw Issue Log</h3>
-        <pre id="raw-issues"></pre>
+        <pre id="raw-issues">No scan yet.</pre>
       </div>
     </section>
   </main>
 
   <footer class="page-footer">
     <p>
-      Part of the <a href="https://github.com/rtfenter/Systems-of-Trust-Series" target="_blank" rel="noreferrer">
-      Systems of Trust Series</a>.
+      Part of the
+      <a href="https://github.com/rtfenter/Systems-of-Trust-Series" target="_blank" rel="noreferrer">
+        Systems of Trust Series
+      </a>.
     </p>
   </footer>
 
