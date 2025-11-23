@@ -41,8 +41,9 @@ This tool is intentionally minimal and aimed at conceptual clarity.
 ---
 
 ## Demo Screenshot
+<img width="2696" height="1552" alt="Screenshot 2025-11-23 at 08-22-11 Event Quality Scanner" src="https://github.com/user-attachments/assets/7a190b85-9fef-410e-b12e-dac7feaea6a4" />
 
-*(A screenshot will be added after initial deployment.)*
+
 
 ---
 
