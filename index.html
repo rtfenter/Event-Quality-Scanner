@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Quality Scanner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="page-header">
+    <div class="page-header-inner">
+      <h1>Event Quality Scanner</h1>
+      <p class="tagline">
+        Check whether a JSON event meets basic field, type, naming, and domain rules.
+      </p>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="panel panel-input">
+      <div class="panel-header">
+        <h2>Input Event</h2>
+        <div class="panel-actions">
+          <button id="load-example" class="btn btn-secondary">Load Example Event</button>
+        </div>
+      </div>
+
+      <p class="help-text">
+        Paste a single JSON object below and click <strong>Scan Event</strong>.
+      </p>
+
+      <textarea id="event-input" class="event-input" spellcheck="false" rows="16" placeholder='{
+  "event_name": "user.login",
+  "user_id": 123,
+  "timestamp": "2025-11-22T15:00:00Z",
+  "environment": "prod"
+}'></textarea>
+
+      <div class="panel-footer">
+        <button id="scan-button" class="btn btn-primary">Scan Event</button>
+        <span id="parse-status" class="parse-status" aria-live="polite"></span>
+      </div>
+    </section>
+
+    <section class="panel panel-results">
+      <div class="panel-header">
+        <h2>Quality Summary</h2>
+      </div>
+
+      <div id="summary" class="summary">
+        <div class="summary-badge summary-badge-idle">
+          No event scanned yet.
+        </div>
+      </div>
+
+      <div class="checks-grid">
+        <div class="check-group">
+          <h3>Required Fields</h3>
+          <ul id="required-issues" class="issues-list"></ul>
+        </div>
+
+        <div class="check-group">
+          <h3>Types &amp; Formats</h3>
+          <ul id="type-issues" class="issues-list"></ul>
+        </div>
+
+        <div class="check-group">
+          <h3>Naming Conventions</h3>
+          <ul id="naming-issues" class="issues-list"></ul>
+        </div>
+
+        <div class="check-group">
+          <h3>Domain Rules</h3>
+          <ul id="domain-issues" class="issues-list"></ul>
+        </div>
+      </div>
+
+      <div class="raw-output">
+        <h3>Raw Issue Log</h3>
+        <pre id="raw-issues"></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <p>
+      Part of the <a href="https://github.com/rtfenter/Systems-of-Trust-Series" target="_blank" rel="noreferrer">
+      Systems of Trust Series</a>.
+    </p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
