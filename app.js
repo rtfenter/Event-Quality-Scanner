@@ -81,7 +81,6 @@ function validateEvent(eventObj, config) {
     }
 
     if (field === "timestamp" && typeof value === "string") {
-      // very light ISO-ish check
       const likelyIso = /^\d{4}-\d{2}-\d{2}T/.test(value);
       if (!likelyIso) {
         issues.push({
@@ -137,7 +136,7 @@ function clearIssuesLists() {
     ul.classList.add("empty");
   });
 
-  document.getElementById("raw-issues").textContent = "";
+  document.getElementById("raw-issues").textContent = "No issues — event meets all configured rules.";
 }
 
 function renderSummary(result) {
@@ -220,9 +219,9 @@ function renderIssues(result) {
   document.getElementById("raw-issues").textContent = raw;
 }
 
-// ---------- Example event ----------
+// ---------- Example events ----------
 
-const EXAMPLE_EVENT = {
+const VALID_EVENT = {
   event_name: "user.login",
   user_id: 123,
   timestamp: "2025-11-22T15:00:00Z",
@@ -231,7 +230,21 @@ const EXAMPLE_EVENT = {
   action_type: "LOGIN",
 };
 
-// ---------- Wire up UI ----------
+const BROKEN_EVENT = {
+  // wrong name (camelCase instead of snake) -> naming issue
+  eventName: "user.login",
+  // wrong type (string instead of number) -> type issue
+  user_id: "123",
+  // non-ISO timestamp -> format warning
+  timestamp: "2025/11/22 15:00",
+  // missing "environment" (required) -> required error
+  // wrong field name + bad domain value
+  env: "production",
+  // invalid domain value for action_type
+  action_type: "LOGIN-FAILED",
+};
+
+// ---------- UI handlers ----------
 
 function onScan() {
   const input = document.getElementById("event-input").value.trim();
@@ -252,6 +265,7 @@ function onScan() {
     clearIssuesLists();
     document.getElementById("summary").innerHTML =
       '<div class="summary-badge summary-badge-fail">Cannot scan: invalid JSON.</div>';
+    document.getElementById("raw-issues").textContent = "No results due to invalid JSON.";
     return;
   }
 
@@ -260,16 +274,34 @@ function onScan() {
   renderIssues(result);
 }
 
-function onLoadExample() {
+function loadExample(eventObj, label) {
   const textarea = document.getElementById("event-input");
-  textarea.value = JSON.stringify(EXAMPLE_EVENT, null, 2);
-  document.getElementById("parse-status").textContent = "Loaded example event.";
+  textarea.value = JSON.stringify(eventObj, null, 2);
+  document.getElementById("parse-status").textContent = `Loaded ${label} example.`;
   clearIssuesLists();
   document.getElementById("summary").innerHTML =
-    '<div class="summary-badge summary-badge-idle">Ready to scan the example event.</div>';
+    '<div class="summary-badge summary-badge-idle">Ready to scan the loaded event.</div>';
+  document.getElementById("raw-issues").textContent = "No scan yet.";
 }
+
+function onLoadValid() {
+  loadExample(VALID_EVENT, "valid");
+}
+
+function onLoadBroken() {
+  loadExample(BROKEN_EVENT, "broken");
+}
+
+// ---------- Wire up ----------
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("scan-button").addEventListener("click", onScan);
-  document.getElementById("load-example").addEventListener("click", onLoadExample);
+  const validBtn = document.getElementById("load-valid");
+  const brokenBtn = document.getElementById("load-broken");
+
+  if (validBtn) validBtn.addEventListener("click", onLoadValid);
+  if (brokenBtn) brokenBtn.addEventListener("click", onLoadBroken);
+
+  // Optional: start with the broken example loaded
+  loadExample(BROKEN_EVENT, "broken");
 });
