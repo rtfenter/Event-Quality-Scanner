@@ -43,11 +43,9 @@ This tool is intentionally minimal and aimed at conceptual clarity.
 ## Demo Screenshot
 <img width="2696" height="1552" alt="Screenshot 2025-11-23 at 08-22-11 Event Quality Scanner" src="https://github.com/user-attachments/assets/7a190b85-9fef-410e-b12e-dac7feaea6a4" />
 
-
-
 ---
 
-## Event Quality Checks Diagram
+## Quality Check Flow Diagram
 
 ```
          [Input JSON Event]
@@ -126,7 +124,6 @@ MVP implemented and active.
 This scanner will focus on core mechanics required to demonstrate event quality checks, not full production validation.
 
 ---
-
 ## Local Use
 
 Everything runs client-side.
@@ -137,4 +134,3 @@ To run locally:
 2. Open `index.html` in your browser  
 
 That’s it — static HTML + JS, no backend required.
-
