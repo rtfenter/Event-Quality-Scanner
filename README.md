@@ -26,7 +26,7 @@ This scanner surfaces these issues clearly and early.
 
 ## Features (MVP)
 
-This prototype will include:
+This prototype includes:
 
 - Input box for a single JSON event  
 - Required-field verification  
